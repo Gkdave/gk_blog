@@ -1,0 +1,7 @@
+
+
+create project gk_blog
+create urls.py 
+create index in view
+create Blog Model 
+create home page and base.html 

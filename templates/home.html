@@ -3,11 +3,53 @@
 
 
 {% block title %}
-    <title>home</title>
+  <title>home</title>
 {% endblock title %}
-    
+
+
 
 {% block body %}
-<h1>This is home page</h1>
+{% if messages %}
+<ul class="messages my-3">
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}}" role="alert">
+      <strong>Message  </strong> {{message}}
+    </div>
+    {% endfor %}
+</ul>
+{% endif %}
+{% load static %}
+ 
+<div class="col-md-7  offset-4 ">
+ <img src="{% static 'img/blog.jpg' %}" alt="blog" style='width: 50%; height: 200px;'>
+</div>
+<div class="row mb-2 my-3">
+  {% for blog in blogs %}
+  <div class="col-md-6">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        {% comment %} <h5>{{blog.id}}</h5> {% endcomment %}
+        <h3 class="mb-0">{{blog.title}}</h3>
+        <div class="mb-1 text-body-secondary">{{blog.date}}</div>
+       <b>Posted By:->{{blog.user_id.username }} </b>
+        <p class="card-text mb-auto " style = 'color:red;'>{{blog.desc}}</p>
+        <div> <button class="btn btn-warning btn-sm mt-3"><a href="blog_detail/{{blog.id}}" >
+          Action
+        </a></button></div>
+        
+      </div>
+  
+    </div>
+  </div>
+  {% endfor %}
+  
+</div>
+
+
+      
+    
+  
 {% endblock body %}
+    
+    
     

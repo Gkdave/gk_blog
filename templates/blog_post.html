@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  <title>post</title>
+{% endblock title %}
+{% load static %}
+
+
+{% block body %}
+{% if messages %}
+<ul class="messages my-3">
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}}" role="alert">
+      <strong>Message  </strong> {{message}}
+    </div>
+    {% endfor %}
+</ul>
+{% endif %}
+<h1 class= "text-center my-3">Post blog </h1>
+<div class="container">
+    <form action="post_blog" method="POST">
+        {% csrf_token %}
+    
+    <div class="mb-3">
+        <label for="text" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" placeholder="title" name='title' required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="content" class="form-label">Description</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc" required></textarea>
+    </div>
+    
+    <input type="submit" value="Post" href="post_blog" class="btn btn-primary">
+</form>
+    
+<div>
+{% endblock body %}
+ 

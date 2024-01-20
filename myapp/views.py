@@ -5,13 +5,14 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login,logout
 
 from datetime import datetime
+from .forms import Edit_blog 
 from .models import Blog 
 
 # Create your views here.
 def index(request):
     
     blog = Blog.objects.all()
-    return render(request,'home.html',{'blog':blog})
+    return render(request,'home.html',{'blogs':blog})
   
 def user_register(request):
 
@@ -50,4 +51,48 @@ def user_login(request):
       return redirect('login')
   return render(request,'login.html')
     
+def user_logout(request):
+    logout(request)
+    return redirect('/')
+  
+def post_blog(request):
+  if request.method == 'POST':
+    title = request.POST.get('title')
+    desc = request.POST['desc']
     
+    if title is None:
+      return redirect('/')
+    else:
+      blog = Blog(title=title,desc=desc,user_id=request.user)
+      blog.save()
+      messages.success(request,"blog post has been successfully")
+      return redirect('post_blog')
+    
+  return render(request,'blog_post.html')
+
+def blog_detail(request,id):
+  blog = Blog.objects.get(id=id)
+  context = {
+    'blog' : blog 
+  }
+  return render(request,'blog_detail.html',context)
+def delete(request,id):
+  blog = Blog.objects.get(id=id)
+  blog.delete()
+  messages.success(request,"Post has been deleted successfully")
+  return redirect('/')
+
+def edit(request,id):
+  blog = Blog.objects.get(id=id)
+  editblog = Edit_blog(instance=blog)
+  
+  if request.method == "POST":
+    form = Edit_blog(request.POST)
+    if form.is_valid():
+      form.save()
+      messages.success(request,"post has been Updated")
+      return redirect('/')
+    
+  return render(request,'edit_blog.html',{'edit_blog': editblog})
+  
+  

@@ -1,9 +1,9 @@
 
-username = gajendra@dave 
-password = gajendra123
+
 create project gk_blog
 create urls.py 
 create index in view
 create Blog Model 
 create home page and base.html 
 create login page and view 
+create change password configuration 

@@ -3,10 +3,12 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth.forms import PasswordChangeForm
 
 from datetime import datetime
-from .forms import Edit_blog 
-from .models import Blog 
+from django.core.mail import send_mail
+from . models import Blog 
+from . forms import Edit_blog 
 
 # Create your views here.
 def index(request):
@@ -95,4 +97,23 @@ def edit(request,id):
     
   return render(request,'edit_blog.html',{'edit_blog': editblog})
   
+def change_password(request):
+  if request.method=="POST":
+    form = PasswordChangeForm(request.user,request.POST)
+    if form.is_valid():
+      form.save()
+      #update_session_auth_hash(request, user)
+      messages.success(request,"Your password has been changed")
+      return redirect('/')
+    else:
+      messages.warning(request,'Error')
+      return redirect("change_password")
+  else:
+    form = PasswordChangeForm(request.user)
+    return render(request,'change_password.html',{ 'PasswordChangeForm':form})
+
+
+  
+
+
   

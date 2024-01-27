@@ -66,7 +66,7 @@ def post_blog(request):
       blog = Blog(title=title,desc=desc,user_id=request.user)
       blog.save()
       messages.success(request,"blog post has been successfully")
-      return redirect('post_blog')
+      return redirect('/')
     
   return render(request,'blog_post.html')
 

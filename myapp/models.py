@@ -9,6 +9,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=150)
     desc = models.TextField(null=False)
     date = models.DateTimeField(default=datetime.now,null=True)
+    #date = models.DateTimeField(auto_now_add=True,null=True)
     
     # date=models.DateTimeField(null=True)
     def __str__(self):

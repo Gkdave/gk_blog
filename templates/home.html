@@ -21,7 +21,8 @@
 {% load static %}
  
 <div class="col-md-7  offset-4 ">
- <img src="{% static 'img/blog.jpg' %}" alt="blog" style='width: 50%; height: 200px;'>
+ {% comment %} <img src="{% static 'img/blog.jpg' %}" alt="blog" style='width: 50%; height: 200px;'> {% endcomment %}
+ <img src="{% static 'img/gk1.jpeg' %}" alt="blog" style='width: 57%; height: 500px;'>
 </div>
 <div class="row mb-2 my-3">
   {% for blog in blogs %}

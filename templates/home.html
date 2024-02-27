@@ -23,6 +23,7 @@
 <div class="col-md-7  offset-4 ">
  {% comment %} <img src="{% static 'img/blog.jpg' %}" alt="blog" style='width: 50%; height: 200px;'> {% endcomment %}
  <img src="{% static 'img/gk1.jpeg' %}" alt="blog" style='width: 57%; height: 500px;'>
+ 
 </div>
 <div class="row mb-2 my-3">
   {% for blog in blogs %}
@@ -31,6 +32,8 @@
       <div class="col p-4 d-flex flex-column position-static">
         {% comment %} <h5>{{blog.id}}</h5> {% endcomment %}
         <h3 class="mb-0">{{blog.title}}</h3>
+        
+        
         <div class="mb-1 text-body-secondary">{{blog.date}}</div>
        <b>Posted By:->{{blog.user_id.username }} </b>
         <p class="card-text mb-auto " style = 'color:red;'>{{blog.desc}}</p>
